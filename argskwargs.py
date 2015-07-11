@@ -15,7 +15,8 @@ class _ArgsKwargs(object):
     While not enforced, instances must be treated as immutable read-only
     data containers.
 
-    Do not instantiate directly; use the argskwargs() function instead.
+    Do not instantiate directly; use the :py:func:`argskwargs()`
+    function instead.
     """
 
     __slots__ = ('args', 'kwargs')
@@ -46,8 +47,8 @@ class _ArgsKwargs(object):
         """
         Invoke the specified callable with the stored arguments.
 
-        Any additional positional and keyword arguments will be merged
-        with the arguments stored on this instance.
+        Any positional and keyword arguments to this method will be
+        merged with the arguments stored in this container.
         """
 
         # No additional arguments specifed; avoid copying.
@@ -68,8 +69,8 @@ class _ArgsKwargs(object):
         See `functools.partial` in the standard library for details
         about partial functions.
 
-        Any additional positional and keyword arguments will be merged
-        with the arguments stored on this instance.
+        Any positional and keyword arguments to this method will be
+        merged with the arguments stored in this container.
         """
         merged_kwargs = self.kwargs.copy()
         merged_kwargs.update(kwargs)
@@ -77,6 +78,23 @@ class _ArgsKwargs(object):
             callable, *(self.args + args), **merged_kwargs)
 
     def copy(self, *args, **kwargs):
+        """
+        Create a copy of this container with additional arguments.
+
+        This is a shorthand for::
+
+          original = argskwargs(...)
+          new_instance = argskwargs(
+              *original.args, *args,
+              **original.kwargs, **kwargs)
+
+        Since instances of this class are intended to be immutable, this
+        method is useful to create a new container instance with
+        additional arguments.
+
+        Any positional and keyword arguments to this method will be
+        merged with the arguments stored in this container.
+        """
         if not args and not kwargs:
             return self
         return self.apply(argskwargs, *args, **kwargs)
@@ -104,8 +122,13 @@ class _ArgsKwargs(object):
 
 def argskwargs(*args, **kwargs):
     """
-    Return a new argskwargs() instance that holds the passed arguments.
+    Return a new container instance that holds the passed arguments.
 
-    The return instance must be treated as an immutable read-only object.
+    The returned instance must be treated as an immutable read-only object.
+
+    :param *args: variable number of positional arguments
+    :param **kwargs: variable number of keyword arguments
+    :return: new container instance
+    :rtype: :py:class:`_ArgsKwargs` instance
     """
     return _ArgsKwargs(args, kwargs)
