@@ -130,4 +130,4 @@ def test_pickle():
 def test_no_instantation():
     """The container class should not to be instantiated directly."""
     with pytest.raises(TypeError):
-        argskwargs_module._ArgsKwargs()
+        argskwargs_module.Arguments()

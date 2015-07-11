@@ -24,7 +24,7 @@ API
 
 .. autofunction:: argskwargs.argskwargs
 
-.. autoclass:: argskwargs._ArgsKwargs
+.. autoclass:: argskwargs.Arguments
    :members:
 
 

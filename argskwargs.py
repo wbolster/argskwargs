@@ -10,7 +10,7 @@ __all__ = ['argskwargs']
 _yes_i_am_an_internal_call = object()
 
 
-class _ArgsKwargs(object):
+class Arguments(object):
     """
     Container class for positional and keyword arguments.
 
@@ -106,7 +106,7 @@ class _ArgsKwargs(object):
         return self.apply(argskwargs, *args, **kwargs)
 
     def __eq__(self, other):
-        if type(other) is not _ArgsKwargs:
+        if type(other) is not Arguments:
             return False
         return (self.args, self.kwargs) == (other.args, other.kwargs)
 
@@ -135,6 +135,6 @@ def argskwargs(*args, **kwargs):
     :param *args: variable number of positional arguments
     :param **kwargs: variable number of keyword arguments
     :return: new container instance
-    :rtype: :py:class:`_ArgsKwargs` instance
+    :rtype: :py:class:`Arguments` instance
     """
-    return _ArgsKwargs(args, kwargs, _yes_i_am_an_internal_call)
+    return Arguments(args, kwargs, _yes_i_am_an_internal_call)
