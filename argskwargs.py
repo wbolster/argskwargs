@@ -132,8 +132,8 @@ def argskwargs(*args, **kwargs):
 
     The returned instance must be treated as an immutable read-only object.
 
-    :param *args: variable number of positional arguments
-    :param **kwargs: variable number of keyword arguments
+    :param \*args: variable number of positional arguments
+    :param \*\*kwargs: variable number of keyword arguments
     :return: new container instance
     :rtype: :py:class:`Arguments` instance
     """
