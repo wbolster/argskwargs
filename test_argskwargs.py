@@ -1,6 +1,9 @@
 import copy
 import pickle
 
+import pytest
+
+import argskwargs as argskwargs_module
 from argskwargs import argskwargs
 
 
@@ -122,3 +125,9 @@ def test_pickle():
     ak2 = pickle.loads(pickle.dumps(ak))
     assert ak2.args == (1,)
     assert ak2.kwargs == {'a': 'aa'}
+
+
+def test_no_instantation():
+    """The container class should not to be instantiated directly."""
+    with pytest.raises(TypeError):
+        argskwargs_module._ArgsKwargs()

@@ -7,6 +7,8 @@ import itertools as _itertools
 
 __all__ = ['argskwargs']
 
+_yes_i_am_an_internal_call = object()
+
 
 class _ArgsKwargs(object):
     """
@@ -21,7 +23,11 @@ class _ArgsKwargs(object):
 
     __slots__ = ('args', 'kwargs')
 
-    def __init__(self, args, kwargs):
+    def __init__(self, args, kwargs, magic):
+        if magic is not _yes_i_am_an_internal_call:
+            raise TypeError(
+                "Use the argskwargs() function to create instances of "
+                "this class. (Did you read the docs at all?)")
         self.args = args
         self.kwargs = kwargs
 
@@ -131,4 +137,4 @@ def argskwargs(*args, **kwargs):
     :return: new container instance
     :rtype: :py:class:`_ArgsKwargs` instance
     """
-    return _ArgsKwargs(args, kwargs)
+    return _ArgsKwargs(args, kwargs, _yes_i_am_an_internal_call)
