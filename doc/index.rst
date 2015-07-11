@@ -22,9 +22,11 @@ TODO
 API
 ===
 
-.. autofunction:: argskwargs.argskwargs
+.. py:currentmodule:: argskwargs
 
-.. autoclass:: argskwargs.Arguments
+.. autofunction:: argskwargs
+
+.. autoclass:: Arguments
    :members:
 
 
