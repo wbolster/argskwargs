@@ -23,7 +23,9 @@ API
 ===
 
 .. autofunction:: argskwargs.argskwargs
+
 .. autoclass:: argskwargs._ArgsKwargs
+   :members:
 
 
 Contributing
