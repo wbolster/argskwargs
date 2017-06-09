@@ -10,24 +10,15 @@ __all__ = ['argskwargs']
 _yes_i_am_an_internal_call = object()
 
 
-class Arguments(object):
+class argskwargs(object):
     """
     Container class for positional and keyword arguments.
 
-    While not enforced, instances must be treated as immutable read-only
-    data containers.
-
-    Do not instantiate directly; use the :py:func:`argskwargs()`
-    function instead.
+    Instances must be treated as an immutable read-only data containers.
     """
-
     __slots__ = ('args', 'kwargs')
 
-    def __init__(self, args, kwargs, magic):
-        if magic is not _yes_i_am_an_internal_call:
-            raise TypeError(
-                "Use the argskwargs() function to create instances of "
-                "this class. (Did you read the docs at all?)")
+    def __init__(self, *args, **kwargs):
         self.args = args
         self.kwargs = kwargs
 
@@ -106,9 +97,9 @@ class Arguments(object):
         return self.apply(argskwargs, *args, **kwargs)
 
     def __eq__(self, other):
-        if type(other) is not Arguments:
-            return False
-        return (self.args, self.kwargs) == (other.args, other.kwargs)
+        if isinstance(other, type(self)):
+            return (self.args, self.kwargs) == (other.args, other.kwargs)
+        return NotImplemented
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -124,17 +115,3 @@ class Arguments(object):
 
     def __setstate__(self, state):
         self.args, self.kwargs = state
-
-
-def argskwargs(*args, **kwargs):
-    """
-    Return a new container instance that holds the passed arguments.
-
-    The returned instance must be treated as an immutable read-only object.
-
-    :param \*args: variable number of positional arguments
-    :param \*\*kwargs: variable number of keyword arguments
-    :return: new container instance
-    :rtype: :py:class:`Arguments` instance
-    """
-    return Arguments(args, kwargs, _yes_i_am_an_internal_call)

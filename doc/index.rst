@@ -24,9 +24,7 @@ API
 
 .. py:currentmodule:: argskwargs
 
-.. autofunction:: argskwargs
-
-.. autoclass:: Arguments
+.. autoclass:: argskwargs
    :members:
 
 
