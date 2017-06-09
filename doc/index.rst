@@ -38,7 +38,7 @@ The source code and issue tracker for this package can be found on Github:
 License
 =======
 
-Copyright © 2015, Wouter Bolsterlee
+Copyright © 2015–2017, Wouter Bolsterlee
 
 All rights reserved.
 
