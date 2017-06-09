@@ -2,6 +2,9 @@
 argskwargs
 ==========
 
+.. image:: https://travis-ci.org/wbolster/argskwargs.svg?branch=master
+    :target: https://travis-ci.org/wbolster/argskwargs
+
 ``argskwargs`` is a small Python library that provides a flexible container for
 positional and keyword arguments.
 
