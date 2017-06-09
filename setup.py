@@ -10,7 +10,7 @@ setup(
     long_description=long_description,
     version='1.0.0',
     author='Wouter Bolsterlee',
-    author_email='Wouter Bolsterlee',
+    author_email='wouter@bolsterl.ee',
     url="https://github.com/wbolster/argskwargs",
     py_modules=['argskwargs'],
     license='BSD',
