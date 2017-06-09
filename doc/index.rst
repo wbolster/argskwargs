@@ -90,7 +90,7 @@ the callable is passed to the arguments,
 instead of the other way around.
 
 Time for more magic: assume that we want to pass more arguments to
-``print_arguments`` than thore stored in the ``argskwargs`` instance.
+``print_arguments`` than those stored in the ``argskwargs`` instance.
 Just pass them in::
 
   >>> my_args(print_arguments, 'another', oh='yes')
