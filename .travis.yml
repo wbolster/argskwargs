@@ -9,4 +9,4 @@ python:
 install:
   - pip install .
   - pip install -r requirements-test.txt
-script: pytest
+script: py.test
