@@ -19,8 +19,8 @@ class argskwargs(object):
     __slots__ = ('args', 'kwargs')
 
     def __init__(self, *args, **kwargs):
-        self.args = args
-        self.kwargs = kwargs
+        self.args = args  #: tuple with positional arguments
+        self.kwargs = kwargs  #: dictionary with keyword arguments
 
     def __repr__(self):
         chunks = _itertools.chain(
