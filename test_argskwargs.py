@@ -106,6 +106,7 @@ def test_equality():
     c = argskwargs(2)
     assert not (a == c)
     assert a != c
+    assert a != object()
 
 
 def test_instance_copying():

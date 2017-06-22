@@ -101,9 +101,6 @@ class argskwargs(object):
             return (self.args, self.kwargs) == (other.args, other.kwargs)
         return NotImplemented
 
-    def __ne__(self, other):
-        return not self.__eq__(other)
-
     def __copy__(self):
         return self
 
