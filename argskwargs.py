@@ -46,6 +46,9 @@ class argskwargs(object):
 
         Any positional and keyword arguments to this method will be
         merged with the arguments stored in this container.
+
+        Instances are callable; invoking an instance is identical to
+        calling :py:meth:`argskwargs.apply`.
         """
 
         # No additional arguments specifed; avoid copying.
