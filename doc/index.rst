@@ -7,6 +7,17 @@ argskwargs
 :py:class:`argskwargs` is a small Python library that provides a
 flexible container for positional and keyword arguments.
 
+Passing around arguments for a function without actually calling that
+function (at least not yet) typically involves two variables that are
+closely kept together:
+
+* a tuple, often called ``args``
+* a dict, often called ``kwargs``
+
+This library simplifies this clunky and error-prone code pattern by
+putting these two values inside a small container, named
+:py:class:`argskwargs`.
+
 
 Installation
 ============
@@ -20,27 +31,17 @@ Installation
 Usage
 =====
 
-:py:class:`argskwargs` provides a small container class to hold
-arbitrary positional arguments (:py:attr:`~argskwargs.args`) and
-keyword arguments (:py:attr:`~argskwargs.kwargs`). This container is
-essentially the same as a ``(args, kwargs)`` tuple, but with a nice
-and small API on top to keep your code simple and clear.
+An :py:class:`argskwargs` container stores arbitrary positional
+arguments (:py:attr:`~argskwargs.args`) and keyword arguments
+(:py:attr:`~argskwargs.kwargs`). This container is essentially the
+same as a ``(args, kwargs)`` tuple, but with a nice and small API on
+top to keep your code simple and clear.
 
-Passing around arguments for a function without actually calling that
-function (at least not yet) typically involves two variables that are
-closely kept together:
-
-* a tuple, often called ``args``
-* a dict, often called ``kwargs``
-
-This library simplifies this clunky and error-prone code pattern by
-putting these two values inside a small container, named
-:py:class:`argskwargs`::
+First, import :py:class:`argskwargs`::
 
   >>> from argskwargs import argskwargs
 
-An :py:class:`argskwargs` container simply stores
-:py:attr:`~argskwargs.args` and :py:attr:`~argskwargs.kwargs`::
+Now, to create an instance::
 
   >>> my_args = argskwargs(1, 2, foo='bar')
   >>> my_args
@@ -61,6 +62,10 @@ Alternatively, access the :py:attr:`~argskwargs.args` and
   (1, 2)
   >>> my_args.kwargs
   {'foo': 'bar'}
+
+
+Calling functions
+-----------------
 
 Let's define a function that simply prints out anything that is passed
 to it::
@@ -120,6 +125,10 @@ the existing positional arguments,
 and the additional keyword arguments augment (or override)
 the existing positional arguments.
 
+
+Making copies with additional arguments
+---------------------------------------
+
 If you just want to extend the arguments
 without calling a function,
 use the :py:meth:`~argskwargs.copy()` method,
@@ -134,6 +143,10 @@ This new argument container can now be used like the original one:
   >>> more_args(print_arguments)
   positional arguments (1, 2, 3, 4)
   keyword arguments {'abc': 'xyz', 'foo': 'bar'}
+
+
+Using partial functions
+-----------------------
 
 In a sense, :py:class:`argskwargs` is the missing companion to
 ``functools.partial()`` from the Python standard library.
