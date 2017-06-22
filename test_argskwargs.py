@@ -42,6 +42,7 @@ def test_copy():
     ak = argskwargs(1, a='aa', b='foo').copy(2, b='bb')
     assert ak.args == (1, 2)
     assert ak.kwargs == dict(a='aa', b='bb')
+    assert ak == ak.copy()
 
 
 def returner(*args, **kwargs):
