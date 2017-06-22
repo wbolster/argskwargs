@@ -40,7 +40,7 @@ putting these two values inside a small container, named
   >>> from argskwargs import argskwargs
 
 An :py:class:`argskwargs` container simply stores
-:py:attr:`~argskwarg.args` and :py:attr:`~argskwarg.kwargs`::
+:py:attr:`~argskwargs.args` and :py:attr:`~argskwargs.kwargs`::
 
   >>> my_args = argskwargs(1, 2, foo='bar')
   >>> my_args
