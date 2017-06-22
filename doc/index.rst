@@ -2,6 +2,8 @@
 argskwargs
 ==========
 
+.. py:currentmodule:: argskwargs
+
 ``argskwargs`` is a small Python library that provides a flexible
 container for positional and keyword arguments.
 
@@ -164,10 +166,10 @@ Or as the Python mantras go:
 API
 ===
 
-.. py:currentmodule:: argskwargs
-
 .. autoclass:: argskwargs
    :members:
+   :special-members:
+   :member-order: bysource
 
 
 Contributing
