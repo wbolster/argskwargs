@@ -157,8 +157,8 @@ the partial function, and even more when calling it::
 
 You may want to avoid the more complex forms,
 since those will likely not improve code clarity.
-Or as the Python mantra goes:
-*simple is better than complex*.
+Or as the Python mantras go:
+*readability counts* and *simple is better than complex*.
 
 
 API
