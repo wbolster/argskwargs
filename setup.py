@@ -8,7 +8,7 @@ setup(
     name='argskwargs',
     description="flexible container for positional and keyword arguments",
     long_description=long_description,
-    version='1.0.1',
+    version='1.0.2',
     author='Wouter Bolsterlee',
     author_email='wouter@bolsterl.ee',
     url="https://github.com/wbolster/argskwargs",
