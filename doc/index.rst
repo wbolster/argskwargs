@@ -125,7 +125,7 @@ Just pass them in::
 
   >>> my_args(print_arguments, 3, 4, abc='xyz')
   positional arguments (1, 2, 3, 4)
-  keyword arguments {'foo': 'bar', 'abc': 'xyz'}
+  keyword arguments {'abc': 'xyz', 'foo': 'bar'}
 
 The additional positional arguments extend
 the existing positional arguments,
