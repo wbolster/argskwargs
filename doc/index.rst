@@ -7,16 +7,17 @@ argskwargs
 :py:class:`argskwargs` is a small Python library that provides a
 flexible container for positional and keyword arguments.
 
-Passing around arguments for a function without actually calling that
-function (at least not yet) typically involves two variables that are
-closely kept together:
+Passing around arguments for a function
+without actually calling that function (at least not yet)
+typically involves two variables
+that are closely kept together:
 
 * a tuple, often called ``args``
 * a dict, often called ``kwargs``
 
-This library simplifies this clunky and error-prone code pattern by
-putting these two values inside a small container, named
-:py:class:`argskwargs`.
+This library simplifies this clunky and error-prone code pattern
+by putting these two values inside a small container,
+named :py:class:`argskwargs`.
 
 
 Installation
@@ -31,23 +32,27 @@ Installation
 Usage
 =====
 
-An :py:class:`argskwargs` container stores arbitrary positional
-arguments (:py:attr:`~argskwargs.args`) and keyword arguments
-(:py:attr:`~argskwargs.kwargs`). This container is essentially the
-same as a ``(args, kwargs)`` tuple, but with a nice and small API on
-top to keep your code simple and clear.
+An :py:class:`argskwargs` container stores arbitrary
+positional arguments (:py:attr:`~argskwargs.args`)
+and keyword arguments (:py:attr:`~argskwargs.kwargs`).
+This container is essentially the same
+as a ``(args, kwargs)`` tuple,
+but with a nice and small API on top
+to keep your code simple and clear.
 
-First, import :py:class:`argskwargs`::
+To get started, import :py:class:`argskwargs`::
 
   >>> from argskwargs import argskwargs
 
-Now, to create an instance::
+To make a container,
+pass arbitrary positional and keyword arguments
+to the :py:class:`argskwargs` class constructor::
 
   >>> my_args = argskwargs(1, 2, foo='bar')
   >>> my_args
   argskwargs(1, 2, foo='bar')
 
-Unpack the container to obtain a tuple and a dict::
+To obtain a tuple and a dict, unpack the container::
 
   >>> x, y = my_args
   >>> x
@@ -67,8 +72,8 @@ Alternatively, access the :py:attr:`~argskwargs.args` and
 Calling functions
 -----------------
 
-Let's define a function that simply prints out anything that is passed
-to it::
+Here is a function that simply prints out
+anything that is passed to it::
 
   >>> import pprint
   >>> def print_arguments(*args, **kwargs):
@@ -76,11 +81,12 @@ to it::
   ...     print('keyword arguments ' + pprint.pformat(kwargs))
 
 (Note: dictionary order cannot be relied on in most Python versions.
-The use of ``pformat()`` makes the output deterministic, since that
-function will sort the dict keys. All the sample code in this
-documentation is actually executed as part of the tests for this
-library, and deterministic output is required for those doctests to
-pass successfully.)
+The use of ``pformat()`` makes the output deterministic,
+since that function will sort the dict keys.
+All the sample code in this documentation
+is actually executed as part of the tests for this library,
+and deterministic output is required
+for those doctests to pass successfully.)
 
 This function can be called directly using ‘splat’ syntax::
 
@@ -88,11 +94,12 @@ This function can be called directly using ‘splat’ syntax::
   positional arguments (1, 2)
   keyword arguments {'foo': 'bar'}
 
-Arguably, this is not much better than using using two variables to
-for the positional and keyword arguments, so let's see what makes
-:py:class:`argskwargs` useful.
-
-Here is another way to do the same using :py:meth:`~argskwargs.apply()`:
+Arguably, this is not much better than
+using using two variables
+for the positional and keyword arguments,
+so let's see what makes :py:class:`argskwargs` useful.
+Here is another way to do the same
+using the :py:meth:`~argskwargs.apply()` method:
 
   >>> my_args.apply(print_arguments)
   positional arguments (1, 2)
@@ -109,28 +116,27 @@ and call the instance directly::
 As you can see the code is inverted:
 the callable is passed to the arguments,
 instead of the other way around,
-as is usually the case.
+as would be the case for a normal function call.
 
 Now, assume that you want to pass
-more arguments to ``print_arguments``
+more arguments to ``print_arguments()``
 than those stored in the :py:class:`argskwargs` instance.
 Just pass them in::
 
-  >>> my_args(print_arguments, 'another', oh='yes')
-  positional arguments (1, 2, 'another')
-  keyword arguments {'foo': 'bar', 'oh': 'yes'}
+  >>> my_args(print_arguments, 3, 4, abc='xyz')
+  positional arguments (1, 2, 3, 4)
+  keyword arguments {'foo': 'bar', 'abc': 'xyz'}
 
 The additional positional arguments extend
 the existing positional arguments,
 and the additional keyword arguments augment (or override)
-the existing positional arguments.
+the existing keyword arguments.
 
 
 Making copies with additional arguments
 ---------------------------------------
 
-If you just want to extend the arguments
-without calling a function,
+To extend an :py:class:`argskwargs` instance,
 use the :py:meth:`~argskwargs.copy()` method,
 which does exactly that::
 
@@ -154,32 +160,35 @@ A partial function (or ‘partial object’)
 can also hold positional and keyword arguments,
 but cannot be used without a callable.
 
-An :py:class:`argskwargs` container can create a partial function by
-providing a callable to its :py:meth:`~argskwargs.partial()` method::
+To create a partial function
+from a :py:class:`argskwargs` container,
+use the :py:meth:`~argskwargs.partial()` method
+and provide it with a callable::
 
   >>> f = my_args.partial(print_arguments)
 
-The resulting partial function can be called as usual:
+The resulting partial function can be called as usual::
 
   >>> f()
   positional arguments (1, 2)
   keyword arguments {'foo': 'bar'}
 
-And of course additional arguments can be provided:
+Partial functions allow additional arguments::
 
   >>> f(3, 4, abc='xyz')
   positional arguments (1, 2, 3, 4)
   keyword arguments {'abc': 'xyz', 'foo': 'bar'}
 
-You can pass more arguments in one go when creating
-the partial function, and even more when calling it::
+For completeness, you can pass more arguments
+when creating the partial function,
+and even more when calling it::
 
   >>> g = my_args.partial(print_arguments, 3, 4, foo='foofoo')
   >>> g(5, 6, bar='baz')
   positional arguments (1, 2, 3, 4, 5, 6)
   keyword arguments {'bar': 'baz', 'foo': 'foofoo'}
 
-You may want to avoid the more complex forms,
+You may want to avoid these more complex forms,
 since those will likely not improve code clarity.
 Or as the Python mantras go:
 *readability counts* and *simple is better than complex*.
@@ -225,13 +234,13 @@ modification, are permitted provided that the following conditions are met:
   to endorse or promote products derived from this software without specific
   prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+This software is provided by the copyright holders and contributors "as is" and
+any express or implied warranties, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose are
+disclaimed. In no event shall the copyright holder or contributors be liable
+for any direct, indirect, incidental, special, exemplary, or consequential
+damages (including, but not limited to, procurement of substitute goods or
+services; loss of use, data, or profits; or business interruption) however
+caused and on any theory of liability, whether in contract, strict liability,
+or tort (including negligence or otherwise) arising in any way out of the use
+of this software, even if advised of the possibility of such damage.
